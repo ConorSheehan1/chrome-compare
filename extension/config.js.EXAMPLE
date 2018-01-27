@@ -1,4 +1,10 @@
-// if the current url contains "questions/tagged/python" open the base_urls with "questions/tagged/python at the end"
-var regex_to_keep = /\/questions\/tagged\/python/;
-var base_urls = ["https://stackoverflow.com/", "https://askubuntu.com/"];
+/* 
+if the current url contains https://stackoverflow.com, https://askubuntu.com, or https://datascience.stackexchange.com
+iterate over the urls and add whatever page you're currently on to the end.
+
+for example https://stackoverflow.com/?tab=featured will open
+https://stackoverflow.com/?tab=featured, https://askubuntu.com/?tab=featured and https://datascience.stackexchange.com/?tab=featured
+*/
+
+var base_urls = ["https://stackoverflow.com", "https://askubuntu.com", "https://datascience.stackexchange.com"];
 
