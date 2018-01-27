@@ -1,0 +1,4 @@
+// if the current url contains "questions/tagged/python" open the base_urls with "questions/tagged/python at the end"
+var regex_to_keep = /\/questions\/tagged\/python/;
+var base_urls = ["https://stackoverflow.com/", "https://askubuntu.com/"];
+
