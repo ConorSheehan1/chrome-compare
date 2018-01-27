@@ -1,20 +1,18 @@
 # chrome-compare 
 This chrome extension can be used to compare sites in new tabs.  
-For example, it could be configured to open the production, staging, and local dev version of a site to compare pages. 
+For example, it could be configured to open the production, staging, and local dev version of a site to compare pages.  
+![setup gif](setup.gif)
 
 ### Requirements
 1. jquery (included in this repo).  
 1. urls in extension/config.js/base_urls must all use the same url structure in order for the links to load correctly.  
 
 ### Setup
-1. Copy extension/config.js.EXAMPLE to extension/config.js  
+1. Copy extension/config.js.EXAMPLE to extension/config.js and customize base_urls as necessary  
     ```cp extension/config.js.EXAMPLE extension/config.js```
 1. Go to ```chrome://extensions/```  
 1. Click the developer mode checkbox  
 1. Click load unpacked extension and select the extension folder in this repo
-1. customize the base_urls  
-
-![setup gif](setup.gif)
 
 ### Usage
 1. Click the icon.  
@@ -31,5 +29,5 @@ For example, it could be configured to open the production, staging, and local d
 Since all of these sites are part of the stackexchange group, most urls follow the same structure and can be opened in all three sites.
 
 ### Credit
-Based on [this tutorial](https://robots.thoughtbot.com/how-to-make-a-chrome-extension#load-your-extension-into-chrome)
-[Peek](https://github.com/phw/peek) screen to gif software 
+Based on [this tutorial](https://robots.thoughtbot.com/how-to-make-a-chrome-extension#load-your-extension-into-chrome)  
+Screen to gif software: [Peek](https://github.com/phw/peek)  
