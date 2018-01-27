@@ -7,12 +7,14 @@ For example, it could be configured to open the production, staging, and local d
 1. urls in extension/config.js/base_urls must all use the same url structure in order for the links to load correctly.  
 
 ### Setup
-1. Go to ```chrome://extensions/```  
-1. Click the developer mode checkbox  
-1. Click load unpacked extension and select the extension folder in this repo 
 1. Copy extension/config.js.EXAMPLE to extension/config.js  
     ```cp extension/config.js.EXAMPLE extension/config.js```
+1. Go to ```chrome://extensions/```  
+1. Click the developer mode checkbox  
+1. Click load unpacked extension and select the extension folder in this repo
 1. customize the base_urls  
+
+![setup gif](setup.gif)
 
 ### Usage
 1. Click the icon.  
@@ -30,3 +32,4 @@ Since all of these sites are part of the stackexchange group, most urls follow t
 
 ### Credit
 Based on [this tutorial](https://robots.thoughtbot.com/how-to-make-a-chrome-extension#load-your-extension-into-chrome)
+[Peek](https://github.com/phw/peek) screen to gif software 
