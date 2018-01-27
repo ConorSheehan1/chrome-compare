@@ -4,7 +4,7 @@ chrome.runtime.onMessage.addListener(
     if (regex_match) {
       if( confirm("open the following urls?\n" + base_urls) && request.message === "clicked_browser_action" ) {
         base_urls.forEach( function(url) {
-          chrome.runtime.sendMessage({"message": "open_new_tab", "url": "http://" + url + regex_match[0]});
+          chrome.runtime.sendMessage({"message": "open_new_tab", "url": url + regex_match[0]});
         });
       }
     } else {
