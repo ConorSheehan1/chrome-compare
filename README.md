@@ -1,10 +1,10 @@
 # chrome-compare 
-This chrome extension can be used to compare sites in new tabs.  
-For example, it could be configured to open the production, staging, and local dev version of a site to compare pages.  
+This chrome extension can be used to compare the same page across multiple sites in new tabs.  
+For example, it could be configured to open the production, staging, and local dev version of a site.  
+
 ![setup gif](setup.gif)
 
 ### Requirements
-1. jquery (included in this repo).  
 1. urls in extension/config.js/base_urls must all use the same url structure in order for the links to load correctly.  
 
 ### Setup
