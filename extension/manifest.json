@@ -10,7 +10,7 @@
       "matches": [
         "<all_urls>"
       ],
-      "js": ["content.js", "config.js"]
+      "js": ["content.js", "url_parser.js", "config.js"]
     }
   ],
   "browser_action": {
