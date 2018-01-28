@@ -28,6 +28,10 @@ For example, it could be configured to open the production, staging, and local d
 
 Since all of these sites are part of the stackexchange group, most urls follow the same structure and can be opened in all three sites.
 
+### Tests
+1. Install [jasmine](https://github.com/jasmine/jasmine)
+1. Run ```jasmine```
+
 ### Credit
 Based on [this tutorial](https://robots.thoughtbot.com/how-to-make-a-chrome-extension#load-your-extension-into-chrome)  
 Screen to gif software: [Peek](https://github.com/phw/peek)  

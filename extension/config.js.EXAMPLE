@@ -8,3 +8,8 @@ https://stackoverflow.com/?tab=featured, https://askubuntu.com/?tab=featured and
 
 var base_urls = ["https://stackoverflow.com", "https://askubuntu.com", "https://datascience.stackexchange.com"];
 
+// Export node module.
+if ( typeof module !== 'undefined' && module.hasOwnProperty('exports') )
+{
+    module.exports = base_urls;
+}
