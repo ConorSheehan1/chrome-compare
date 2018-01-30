@@ -1,5 +1,5 @@
 var url_parser = require('../extension/url_parser.js');
-var base_urls = require('../extension/config.js');
+var base_urls = ["https://stackoverflow.com", "https://askubuntu.com", "https://datascience.stackexchange.com"];
 
 describe('build_regex', function() {
   // define default_regex match in advance
@@ -17,8 +17,7 @@ describe('build_regex', function() {
       // run the regex match
       var matches = input.match(regex);
       // expect the last match to be everything added to the base_url
-      var url_query = matches[matches.length -1];
-      expect(url_query).toEqual(output);
+      expect(url_parser.get_path(matches)).toEqual(output);
     });
   }
 
@@ -43,5 +42,12 @@ describe('build_regex', function() {
     // only extended_path should get matched
     match_paths_after_base_url(url + extended_path, extended_path, modified_regex);
   });
+});
 
+describe('base_urls_except', function() {
+  var except_this_string = "https://stackoverflow.com";
+  it('returns the base_urls, except for ' + except_this_string, function() {
+    // if you pass the first item in base_urls to base_urls_except, you should get back everything except the first item
+    expect(url_parser.base_urls_except(base_urls, base_urls[0])).toEqual(base_urls.slice(1))
+  });
 });
