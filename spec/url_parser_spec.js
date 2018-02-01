@@ -1,5 +1,10 @@
 var url_parser = require('../extension/url_parser.js');
 var base_urls = ["https://stackoverflow.com", "https://askubuntu.com", "https://datascience.stackexchange.com"];
+var request = {"message":"clicked_browser_action"};
+// stub alert and confirm
+alert = jasmine.createSpy("alert");
+confirm = jasmine.createSpy("confirm");
+
 
 describe('build_regex', function() {
   // define default_regex match in advance
@@ -44,10 +49,51 @@ describe('build_regex', function() {
   });
 });
 
+
 describe('base_urls_except', function() {
   var except_this_string = "https://stackoverflow.com";
   it('returns the base_urls, except for ' + except_this_string, function() {
     // if you pass the first item in base_urls to base_urls_except, you should get back everything except the first item
     expect(url_parser.base_urls_except(base_urls, base_urls[0])).toEqual(base_urls.slice(1))
+  });
+});
+
+
+describe('open_urls', function() {
+  it('returns an alert when no match is found', function(){
+    var current_url = "https://not.in.base_urls";
+    url_parser.open_urls(current_url, base_urls, request, console.log, false);
+    expect(alert).toHaveBeenCalledWith("no match");
+  });
+
+  it('returns all urls to be opened when a match is founded', function(){
+    var current_url = base_urls[0];
+    url_parser.open_urls(current_url, base_urls, request, console.log, false);
+    expect(confirm).toHaveBeenCalledWith("open the following urls?" + base_urls.map(url => "\n" + url));
+  });
+
+  it('returns all urls except the current one when exclude_current is true', function(){
+    var current_url = base_urls[0];
+    var urls_to_open = url_parser.base_urls_except(base_urls, current_url).map(url => "\n" + url);
+    url_parser.open_urls(current_url, base_urls, request, console.log, true);
+    expect(confirm).toHaveBeenCalledWith("open the following urls?" + urls_to_open);
+  });
+
+  it('adds path of url match to all base_urls', function(){
+    var added_path = "/add/this/stuff"
+    var current_url = base_urls[0] + added_path;
+    var urls_to_open = base_urls.map(url => "\n" + url + added_path);
+    url_parser.open_urls(current_url, base_urls, request, console.log, false);
+    expect(confirm).toHaveBeenCalledWith("open the following urls?" + urls_to_open);
+  });   
+
+  it('adds path of url match to all base_urls except the current one when exclude_current is true', function(){
+    var added_path = "/add/this/stuff"
+    var current_url = base_urls[0] + added_path;
+    // need to pass base url without added path to base_urls_except
+    var urls_to_open = url_parser.base_urls_except(base_urls, base_urls[0]).map(url => "\n" + url + added_path);
+    url_parser.open_urls(current_url, base_urls, request, console.log, true);
+    expect(confirm).toHaveBeenCalledWith("open the following urls?" + urls_to_open);
+
   });
 });
