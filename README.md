@@ -1,4 +1,9 @@
 # chrome-compare 
+
+[![Build Status](https://travis-ci.org/ConorSheehan1/chrome-compare.svg?branch=master)](https://travis-ci.org/ConorSheehan1/chrome-compare)
+
+[![GitHub issues](https://img.shields.io/github/issues/ConorSheehan1/chrome-compare.svg)](ConorSheehan1/chrome-compare/issues)
+
 This chrome extension can be used to compare the same page across multiple sites in new tabs.  
 For example, it could be configured to open the production, staging, and local dev version of a site.  
 
