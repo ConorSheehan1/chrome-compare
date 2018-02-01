@@ -11,8 +11,11 @@
     "url": "https://github.com/ashleygwilliams/my_package.git"
   },
 
+
+
   "author": "Conor Sheehan",
   "license": "MIT",
+  "private": true,
 
 }
 
