@@ -4,9 +4,6 @@ For example, it could be configured to open the production, staging, and local d
 
 ![setup gif](setup.gif)
 
-### Requirements
-1. urls in extension/config.js/base_urls must all use the same url structure in order for the links to load correctly.  
-
 ### Setup
 1. Copy extension/config.js.EXAMPLE to extension/config.js and customize base_urls as necessary  
     ```cp extension/config.js.EXAMPLE extension/config.js```
@@ -18,6 +15,12 @@ For example, it could be configured to open the production, staging, and local d
 1. Click the icon.  
 1. If the url contains any of the base_urls in config.js, you'll recieve a confirm popup.  
 1. If you click ok, each url in base_urls (with the page you're currently on appended to them) will open in a new tab.
+
+
+| setting             | type           | purpose            |
+|---------------------|----------------|--------------------|
+| base_urls           | array [string] | urls to open       |
+| exclude_current_url | boolean        | reopen current url |
 
 #### Example
 1. Follow [The Setup](#setup) and use config.js.example
