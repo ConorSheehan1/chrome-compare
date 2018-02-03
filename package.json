@@ -1,0 +1,21 @@
+{
+  "name": "chrome-compare",
+  "version": "0.0.3",
+
+  "scripts": {
+      "test": "jasmine spec/*spec.js"
+  },
+
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ConorSheehan1/chrome-compare"
+  },
+
+
+
+  "author": "Conor Sheehan",
+  "license": "MIT",
+  "private": true
+
+}
+
