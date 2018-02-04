@@ -1,6 +1,6 @@
 {
   "name": "chrome-compare",
-  "version": "0.0.3",
+  "version": "0.0.4",
 
   "scripts": {
       "test": "jasmine spec/*spec.js"
