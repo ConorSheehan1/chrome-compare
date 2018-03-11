@@ -1,17 +1,25 @@
-window.onload = function(){ 
-  function remove(id) {
-    var elem = document.getElementById(id);
-    elem.parentNode.removeChild(elem);
-  }
+function remove_option(id) {
+  var elem = document.getElementById(id);
+  elem.parentNode.removeChild(elem);
+}
 
-  function save_options() {
-    let base_urls = chrome.storage.sync.get("base_urls");
+function save_options() {
+  let default_base_urls = ["https://stackoverflow.com", "https://askubuntu.com", "https://datascience.stackexchange.com"];
+  chrome.storage.sync.get({'base_urls' : default_base_urls}, function (result) {
+    let base_urls = result.base_urls;
     base_urls.push("test");
+    console.log(base_urls);
     chrome.storage.sync.set({"base_urls": base_urls});
-  }
+  });
+  
+}
 
-  var elem = document.getElementById("save");
-  elem.onclick = save_options;
+window.onload = function(){ 
+  document.getElementById("save").onclick = save_options;
+
+  // document.getElementById("url1").onclick = function() {
+  //   remove_option("url1");
+  // };
 
   console.log("load js");
 };

@@ -10,7 +10,7 @@
       "matches": [
         "<all_urls>"
       ],
-      "js": ["content.js", "url_parser.js", "config.js"]
+      "js": ["content.js", "url_parser.js"]
     }
   ],
   "browser_action": {
@@ -19,7 +19,7 @@
   "options_page": "options.html",
   "permissions": [
     "tabs",
-    "storage",
+    "storage"
   ]
 
 }
