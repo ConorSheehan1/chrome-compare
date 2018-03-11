@@ -62,37 +62,23 @@ describe('base_urls_except', function() {
 describe('open_urls', function() {
   it('returns an alert when no match is found', function(){
     var current_url = "https://not.in.base_urls";
-    url_parser.open_urls(current_url, base_urls, request, console.log, false);
+    url_parser.open_urls(current_url, base_urls, request, console.log);
     expect(alert).toHaveBeenCalledWith("no match");
   });
 
-  it('returns all urls to be opened when a match is founded', function(){
-    var current_url = base_urls[0];
-    url_parser.open_urls(current_url, base_urls, request, console.log, false);
-    expect(confirm).toHaveBeenCalledWith("open the following urls?" + base_urls.map(url => "\n" + url));
-  });
-
-  it('returns all urls except the current one when exclude_current is true', function(){
+  it('returns all urls except the current one when a match is found', function(){
     var current_url = base_urls[0];
     var urls_to_open = url_parser.base_urls_except(base_urls, current_url).map(url => "\n" + url);
-    url_parser.open_urls(current_url, base_urls, request, console.log, true);
+    url_parser.open_urls(current_url, base_urls, request, console.log);
     expect(confirm).toHaveBeenCalledWith("open the following urls?" + urls_to_open);
   });
 
-  it('adds path of url match to all base_urls', function(){
-    var added_path = "/add/this/stuff"
-    var current_url = base_urls[0] + added_path;
-    var urls_to_open = base_urls.map(url => "\n" + url + added_path);
-    url_parser.open_urls(current_url, base_urls, request, console.log, false);
-    expect(confirm).toHaveBeenCalledWith("open the following urls?" + urls_to_open);
-  });   
-
-  it('adds path of url match to all base_urls except the current one when exclude_current is true', function(){
+  it('adds path of url match to all base_urls except the current one when a match with an added path is found', function(){
     var added_path = "/add/this/stuff"
     var current_url = base_urls[0] + added_path;
     // need to pass base url without added path to base_urls_except
     var urls_to_open = url_parser.base_urls_except(base_urls, base_urls[0]).map(url => "\n" + url + added_path);
-    url_parser.open_urls(current_url, base_urls, request, console.log, true);
+    url_parser.open_urls(current_url, base_urls, request, console.log);
     expect(confirm).toHaveBeenCalledWith("open the following urls?" + urls_to_open);
 
   });
