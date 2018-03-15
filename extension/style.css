@@ -1,0 +1,25 @@
+label {
+  width: 60px;
+  display: inline-block;
+}
+
+#title {
+  margin-left: 60px;
+}
+
+input[type=text] {
+  width: 30%;
+  margin: 2px;
+}
+
+input[type=button] {
+  margin: 5px;
+  width:  50px;
+}
+
+/*#reset {
+  color:white;
+  background: linear-gradient(orange, red);
+  border-color: black;
+  border-radius: 5px; 
+}*/
