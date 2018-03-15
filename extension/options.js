@@ -14,15 +14,16 @@ function remove_base_url(url) {
   })
 }
 
-function set_form_fields(base_urls) {
-  let form = document.getElementById("form");
-  // Clear previous contents of the form
-  while (form.hasChildNodes()) {
-    form.removeChild(form.lastChild);
-  }
-  // add base_urls to form
-  for (i=0;i<base_urls.length;i++) {
-    let url = base_urls[i];
+function add_base_url(url) {
+  chrome.storage.sync.get('base_urls', function(result){
+    let base_urls = result.base_urls;
+    base_urls.push(url);
+    chrome.storage.sync.set({"base_urls": base_urls});
+    console.log("saved base_urls: " + base_urls);
+  })
+}
+
+function display_url_ui(form, url, i) {
     let id = "url" + (i+1);
     let remove_id = "remove_" + url
 
@@ -47,30 +48,77 @@ function set_form_fields(base_urls) {
     form.appendChild(document.createElement("br"));
     form.appendChild(document.createElement("br"));
 
-
-    document.getElementById(remove_id).onclick = function() {
+    // TODO: look in to having last input be same format as above inputs but with plus button beside instead of minus
+    // clicking plus would write to chrome storage and add new empty input below
+    // possibly change label of input from new_url to url(n+1)
+    // also break this function up (function to add inputs with same layout (label, input, add/remove button))
+    remove_input.onclick = function() {
       let url = this.id.replace("remove_", "");
       remove_base_url(url);
       location.reload();
     }
+}
+
+function display_add_ui(form) {
+  let id = "new_url";
+  let add_id = "add_" + id;
+
+  let label = document.createElement("label");
+  label.for = id;
+  label.innerHTML = "new url: ";
+
+  let input = document.createElement("input");
+  input.type = "text";
+  input.name = id;
+  input.id = id;
+
+  let add_input = document.createElement("input");
+  add_input.type = "button";
+  add_input.value = "+";
+
+  add_input.onclick = function() {
+    let new_url_input = document.getElementById(id);
+    let url = new_url_input.value.trim();
+    add_base_url(url);
+    // setTimeout(console.log, 10000);
+    location.reload(); 
   }
 
-  let add_button = document.createElement("input");
-  add_button.type = "button";
-  add_button.value = "+";
-  add_button.id = "add";
-  add_button.onclick = function() {
-    // form.insertBefore(document.getElementById("url1"), document.createElement("input"));
+  form.appendChild(label);
+  form.appendChild(input);
+  form.appendChild(add_input);
+  // TODO: use css instead
+  form.appendChild(document.createElement("br"));
+  form.appendChild(document.createElement("br"));
 
+}
+
+function set_form_fields(base_urls) {
+  let form = document.getElementById("form");
+  // Clear previous contents of the form
+  while (form.hasChildNodes()) {
+    form.removeChild(form.lastChild);
+  }
+  console.log(base_urls);
+  // add base_urls to form
+  for (i=0;i<base_urls.length;i++) {
+    let url = base_urls[i];
+    display_url_ui(form, url, i);
   }
 
-  let submit_button = document.createElement("input");
-  submit_button.type = "submit";
-  submit_button.value = "Save";
-  submit_button.id = "save";
+  // add option to add more base urls
+  display_add_ui(form);
 
-  form.appendChild(add_button);
-  form.appendChild(submit_button);
+  // add option to reset
+  let reset_button = document.createElement("input");
+  reset_button.type = "button";
+  reset_button.value = "reset";
+  reset_button.onclick = function(){
+    reset_chrome_storage();
+    location.reload();
+  }
+  form.appendChild(reset_button);
+
 }
 
 function load_options(default_base_urls) {
@@ -103,14 +151,6 @@ function save_options(new_base_urls, default_base_urls) {
 window.onload = function(){   
   let default_base_urls = ["https://stackoverflow.com", "https://askubuntu.com", "https://datascience.stackexchange.com"];
   load_options(default_base_urls);
-
-  document.getElementById("save").onclick = function(){
-    save_options(["here!!"], default_base_urls);
-  };
-
-  // document.getElementById("url1").onclick = function() {
-  //   remove_option("url1");
-  // };
 
   console.log("load js");
 };
