@@ -9,20 +9,14 @@ For example, it could be configured to open the production, staging, and local d
 ![setup gif](setup.gif)
 
 ### Setup
-1. Copy extension/config.js.EXAMPLE to extension/config.js and customize as necessary  
-    ```cp extension/config.js.EXAMPLE extension/config.js```
 1. Go to ```chrome://extensions/```  
 1. Click the developer mode checkbox  
 1. Click load unpacked extension and select the extension folder in this repo
-
-| config.js setting             | type           | purpose            |
-|-------------------------------|----------------|--------------------|
-| base_urls                     | array [string] | urls to open       |
-| exclude_current_url           | boolean        | reopen current url |
+1. Right click on the extension icon to customize the urls
 
 ### Usage
 1. Click the icon.  
-1. If the url contains any of the base_urls in config.js, you'll recieve a confirm popup.  
+1. If the url contains any of the base_urls you've set in the options page, you'll recieve a confirm popup.  
 1. If you click ok, each url in base_urls (with the page you're currently on appended to them) will open in a new tab.
 
 #### Example
@@ -38,5 +32,6 @@ For example, it could be configured to open the production, staging, and local d
 1. Run ```jasmine```
 
 ### Credit
-Based on [this tutorial](https://robots.thoughtbot.com/how-to-make-a-chrome-extension#load-your-extension-into-chrome)  
+Based on [this chrome extension tutorial](https://robots.thoughtbot.com/how-to-make-a-chrome-extension#load-your-extension-into-chrome)
+and [this options page tutorial](https://www.youtube.com/watch?v=d4RPNh_m8gc)  
 Screen to gif software: [Peek](https://github.com/phw/peek)  

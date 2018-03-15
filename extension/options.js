@@ -162,19 +162,24 @@ function save_options(new_base_urls, default_base_urls) {
   });
 }
 
-
-window.onload = function(){   
-  let default_base_urls = ["https://stackoverflow.com", "https://askubuntu.com", "https://datascience.stackexchange.com"];
-  load_options(default_base_urls);
-
-  console.log("load js");
-};
-
-
-
-
 function reset_chrome_storage(){
   chrome.storage.sync.set(
     {"base_urls": ["https://stackoverflow.com", "https://askubuntu.com", "https://datascience.stackexchange.com"]}
   );
+}
+
+
+// Export node module for tests
+if ( typeof module !== 'undefined' && module.hasOwnProperty('exports') )
+{
+    module.exports = {
+      is_url: is_url,
+      add_base_url: add_base_url
+    };
+} else {
+// otherwise, actually render options page
+  window.onload = function(){   
+    let default_base_urls = ["https://stackoverflow.com", "https://askubuntu.com", "https://datascience.stackexchange.com"];
+    load_options(default_base_urls);
+  };
 }
