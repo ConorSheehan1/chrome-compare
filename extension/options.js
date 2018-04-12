@@ -2,30 +2,31 @@ function remove_base_url(url) {
   // if we get to this point base urls must already exist, so no need for default value
   chrome.storage.sync.get('base_urls', function(result){
     let base_urls = result.base_urls;
-    console.log(base_urls, url);
+    // console.log(base_urls, url);
     // if the url is not in base_urls we should throw an exception
     let index = base_urls.indexOf(url);
     if (index < 0){
-      throw 'Error: ' + url + " was not in chrome storage but was on the options page.";
+      throw new Error(url + " was not in chrome storage but was on the options page.");
     }
-    base_urls.pop(index);
-    chrome.storage.sync.set({"base_urls": base_urls});
-    console.log("saved base_urls: " + base_urls);
+    // base_urls.pop(index);
+    let base_urls_removed = base_urls.filter(e => e !== url);
+    chrome.storage.sync.set({"base_urls": base_urls_removed});
+    // console.log("saved base_urls: " + base_urls_removed);
   })
 }
 
 function add_base_url(url) {
   let message = "That doesn't look like a url.\nAre you sure you want to add that?";
   if (!is_url(url) && !confirm(message)) {
-    console.log("aborting save");
-    return null;
+    return false;
   }
   chrome.storage.sync.get('base_urls', function(result){
     let base_urls = result.base_urls;
     base_urls.push(url);
     chrome.storage.sync.set({"base_urls": base_urls});
-    console.log("saved base_urls: " + base_urls);
+    // console.log("saved base_urls: " + base_urls);
   })
+  return true
 }
 
 // just check if it starts with http or https and has a domain or ip
@@ -69,6 +70,7 @@ function display_url_ui(form, url, i) {
     // also break this function up (function to add inputs with same layout (label, input, add/remove button))
     remove_input.onclick = function() {
       let url = this.id.replace("remove_", "");
+      // console.log(url)
       remove_base_url(url);
       location.reload();
     }
@@ -113,7 +115,7 @@ function set_form_fields(base_urls) {
   while (form.hasChildNodes()) {
     form.removeChild(form.lastChild);
   }
-  console.log(base_urls);
+  // console.log(base_urls);
   // add base_urls to form
   for (i=0;i<base_urls.length;i++) {
     let url = base_urls[i];
@@ -158,7 +160,7 @@ function save_options(new_base_urls, default_base_urls) {
       }
     });
     chrome.storage.sync.set({"base_urls": base_urls});
-    console.log("saved base_urls: " + base_urls);
+    // console.log("saved base_urls: " + base_urls);
   });
 }
 
@@ -174,7 +176,8 @@ if ( typeof module !== 'undefined' && module.hasOwnProperty('exports') )
 {
     module.exports = {
       is_url: is_url,
-      add_base_url: add_base_url
+      add_base_url: add_base_url,
+      remove_base_url: remove_base_url
     };
 } else {
 // otherwise, actually render options page

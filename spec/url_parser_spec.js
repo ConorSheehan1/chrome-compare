@@ -80,6 +80,5 @@ describe('open_urls', function() {
     var urls_to_open = url_parser.base_urls_except(base_urls, base_urls[0]).map(url => "\n" + url + added_path);
     url_parser.open_urls(current_url, base_urls, request, console.log);
     expect(confirm).toHaveBeenCalledWith("open the following urls?" + urls_to_open);
-
   });
 });
