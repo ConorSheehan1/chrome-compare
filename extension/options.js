@@ -56,6 +56,7 @@ function display_url_ui(form, url, i) {
     input.type = "text";
     input.name = id;
     input.value = url;
+    input.disabled = true;
 
     form.appendChild(label);
     form.appendChild(input);
@@ -148,24 +149,6 @@ function load_options(default_base_urls) {
       base_urls = default_base_urls;
     }
     set_form_fields(base_urls);
-  });
-}
-
-function save_options(new_base_urls, default_base_urls) {
-  // if base_urls is not in chrome storage, use default value
-  chrome.storage.sync.get({'base_urls' : default_base_urls}, function (result) {
-    let base_urls = result.base_urls;
-
-    // add new url only if it's not already in base_urls
-    new_base_urls.forEach(function(url){
-      if (!base_urls.includes(url)) {
-        base_urls.push(url);
-      } else {
-        console.log(url + "already in base_urls");
-      }
-    });
-    chrome.storage.sync.set({"base_urls": base_urls});
-    // console.log("saved base_urls: " + base_urls);
   });
 }
 
