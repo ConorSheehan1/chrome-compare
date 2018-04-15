@@ -1,7 +1,7 @@
 function build_regex(base_urls) {
   // build regex with look ahead that will match any of the base urls
   // and then add whatever comes after the baseurl to the last capture group 
-  var regex_string = "(" + base_urls.join("|") + ")(?=(\.*))";
+  let regex_string = "(" + base_urls.join("|") + ")(?=(\.*))";
   return new RegExp(regex_string, "i");
 }
 
@@ -20,12 +20,12 @@ function base_urls_except(base_urls, except){
 }
 
 function open_urls(current_url, base_urls, request, callback_to_open_url) {
-  var matches = current_url.match(build_regex(base_urls));
+  let matches = current_url.match(build_regex(base_urls));
 
   if (matches) {
-    var url_path = get_path(matches);
+    let url_path = get_path(matches);
     // get all base urls except the current url and add the path to the end of them
-    var urls_to_open = base_urls_except(base_urls, get_domain(matches)).map(url => url + url_path);
+    let urls_to_open = base_urls_except(base_urls, get_domain(matches)).map(url => url + url_path);
 
     if (confirm("open the following urls?" + urls_to_open.map(url => "\n" + url)) 
       && request.message === "clicked_browser_action") {

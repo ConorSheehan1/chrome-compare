@@ -53,19 +53,18 @@ describe('is_url', function(){
 
 describe('add_base_url', function(){
   it('rejects invalid urls', function(){
+    confirm.and.returnValue(false);
     let message = "That doesn't look like a url.\nAre you sure you want to add that?";
     expect(options.add_base_url(invalid_domain)).toEqual(false);
     expect(confirm).toHaveBeenCalledWith(message);
   });
 
-  // // this logs messages to the console about opening urls?
-  // test does pass
-  // it('accepts invalid urls if forced', function(){
-  //   confirm.and.returnValue(true);
-  //   let message = "That doesn't look like a url.\nAre you sure you want to add that?";
-  //   expect(options.add_base_url(invalid_domain)).toEqual(true);
-  //   expect(confirm).toHaveBeenCalledWith(message);
-  // });
+  it('accepts invalid urls if forced', function(){
+    confirm.and.returnValue(true);
+    let message = "That doesn't look like a url.\nAre you sure you want to add that?";
+    expect(options.add_base_url(invalid_domain)).toEqual(true);
+    expect(confirm).toHaveBeenCalledWith(message);
+  });
 
   it('accepts valid urls', function(){
     expect(options.add_base_url(valid_domain)).toEqual(true);
