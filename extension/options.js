@@ -140,8 +140,13 @@ function set_form_fields(base_urls) {
 
 function load_options(default_base_urls) {
   let form = document.getElementById("form");
-  chrome.storage.sync.get({'base_urls' : default_base_urls}, function (result) {
+  chrome.storage.sync.get('base_urls', function (result) {
     let base_urls = result.base_urls;
+    // if the base urls aren't in chrome storage, set them
+    if (!result.base_urls) {
+      chrome.storage.sync.set({'base_urls': default_base_urls});
+      base_urls = default_base_urls;
+    }
     set_form_fields(base_urls);
   });
 }
