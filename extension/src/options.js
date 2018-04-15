@@ -139,7 +139,7 @@ function set_form_fields(base_urls) {
   reset_button.value = "reset";
   reset_button.id = "reset";
   reset_button.onclick = function(){
-    reset_chrome_storage();
+    reset_chrome_storage_base_urls();
     location.reload();
   }
   form.appendChild(reset_button);
@@ -159,7 +159,7 @@ function load_options(default_base_urls) {
   });
 }
 
-function reset_chrome_storage(){
+function reset_chrome_storage_base_urls(){
   chrome.storage.sync.set(
     {"base_urls": ["https://stackoverflow.com", "https://askubuntu.com", "https://datascience.stackexchange.com"]}
   );
@@ -172,7 +172,8 @@ if ( typeof module !== 'undefined' && module.hasOwnProperty('exports') )
     module.exports = {
       is_url: is_url,
       add_base_url: add_base_url,
-      remove_base_url: remove_base_url
+      remove_base_url: remove_base_url,
+      reset_chrome_storage_base_urls: reset_chrome_storage_base_urls
     };
 } else {
 // otherwise, actually render options page

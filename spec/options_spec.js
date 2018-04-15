@@ -12,7 +12,8 @@ chrome = {
       set: function(dict) {
         key = Object.keys(dict)[0];
         value = Object.values(dict)[0];
-        chrome_internal_mock[key] = value;
+        // use slice to make copy of array, don't mutate original!
+        chrome_internal_mock[key] = value.slice();
         return true;
       },
       get: function(key, func) {
@@ -30,7 +31,7 @@ let valid_domain = "https://stackoverflow.com";
 let invalid_domain = "http://__";
 let valid_ip = "http://127.0.0.1";
 let invalid_ip = "http://0"
-let base_urls = ["https://stackoverflow.com", "https://askubuntu.com", "https://datascience.stackexchange.com"];
+let default_base_urls = ["https://stackoverflow.com", "https://askubuntu.com", "https://datascience.stackexchange.com"];
 
 
 describe('is_url', function(){
@@ -72,29 +73,24 @@ describe('add_base_url', function(){
 });
 
 describe('remove_base_url', function(){
-  it('removes base urls if they exist', function(){
-    chrome.storage.sync.set({"base_urls":base_urls});
+  beforeEach(function() {
+    chrome.storage.sync.set({"base_urls":default_base_urls});
     // check the chrome storage is set correctly
     expect(chrome.storage.sync.get(
-      'base_urls', function(result){
-      return result.base_urls;})
-    ).toEqual(base_urls);
+      'base_urls', result => result.base_urls)
+    ).toEqual(default_base_urls);
+  })
+
+  it('removes base urls if they exist', function(){
     options.remove_base_url("https://stackoverflow.com");
     let base_urls_removed = ["https://askubuntu.com", "https://datascience.stackexchange.com"];
     // check the correct url is removed
     expect(chrome.storage.sync.get(
-        'base_urls', function(result){
-        return result.base_urls;})
+        'base_urls', result => result.base_urls)
       ).toEqual(base_urls_removed);
   });
 
   it('throws an exception if a remove for a base url which does not exist is attempted', function(){
-    chrome.storage.sync.set({"base_urls":base_urls});
-    // check the chrome storage is set correctly
-    expect(chrome.storage.sync.get(
-      'base_urls', function(result){
-      return result.base_urls;})
-    ).toEqual(base_urls);
     // need to use anonymous function when expecting exception
     // https://stackoverflow.com/questions/4144686/how-to-write-a-test-which-expects-an-error-to-be-thrown-in-jasmine
     let missing_url_error = new Error("https://asdf.com was not in chrome storage but was on the options page.");
@@ -102,6 +98,22 @@ describe('remove_base_url', function(){
       function(){
         options.remove_base_url("https://asdf.com");
       }).toThrow(missing_url_error);
+  });
+});
+
+describe('reset_chrome_storage_base_urls', function(){
+  it('resets the base urls in chrome storage', function(){
+    let invalid_base_urls = ["asdf", invalid_ip, invalid_domain];
+    chrome.storage.sync.set({"base_urls":invalid_base_urls});
+    // check the chrome storage is set correctly
+    expect(chrome.storage.sync.get(
+      'base_urls', result => result.base_urls)
+    ).toEqual(invalid_base_urls);
+
+    options.reset_chrome_storage_base_urls();
+    expect(chrome.storage.sync.get(
+      'base_urls', result => result.base_urls)
+    ).toEqual(default_base_urls);
   });
 });
 
