@@ -27,7 +27,9 @@ chrome = {
 };
 
 // default test values
-let valid_domain = "https://stackoverflow.com";
+// make sure valid_domain isn't already in default_base_urls 
+// to account for uniqueness constraint in add_base_url
+let valid_domain = "http://stackoverflow.com";
 let invalid_domain = "http://__";
 let valid_ip = "http://127.0.0.1";
 let invalid_ip = "http://0"
@@ -53,6 +55,20 @@ describe('is_url', function(){
 });
 
 describe('add_base_url', function(){
+  beforeEach(function() {
+    chrome.storage.sync.set({"base_urls":default_base_urls});
+    // check the chrome storage is set correctly
+    expect(chrome.storage.sync.get(
+      'base_urls', result => result.base_urls)
+    ).toEqual(default_base_urls);
+  })
+
+  it('rejects duplicate urls', function(){
+    let message = "url1 is already https://stackoverflow.com\nbase_urls must be unique.";
+    expect(options.add_base_url('https://stackoverflow.com')).toEqual(false);
+    expect(alert).toHaveBeenCalledWith(message);
+  });
+
   it('rejects invalid urls', function(){
     confirm.and.returnValue(false);
     let message = "That doesn't look like a url.\nAre you sure you want to add that?";

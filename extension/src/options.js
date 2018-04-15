@@ -2,38 +2,33 @@ function remove_base_url(url) {
   // if we get to this point base urls must already exist, so no need for default value
   chrome.storage.sync.get('base_urls', function(result){
     let base_urls = result.base_urls;
-    // console.log(base_urls, url);
     // if the url is not in base_urls we should throw an exception
     let index = base_urls.indexOf(url);
     if (index < 0){
       throw new Error(url + " was not in chrome storage but was on the options page.");
     }
-    // base_urls.pop(index);
     let base_urls_removed = base_urls.filter(e => e !== url);
     chrome.storage.sync.set({"base_urls": base_urls_removed});
-    // console.log("saved base_urls: " + base_urls_removed);
   })
 }
 
 function add_base_url(url) {
   let message = "That doesn't look like a url.\nAre you sure you want to add that?";
+  let success = true
   if (!is_url(url) && !confirm(message)) {
     return false;
   }
   chrome.storage.sync.get('base_urls', function(result){
     let base_urls = result.base_urls;
-
-    // // make sure base urls are unique
-    // if (base_urls.includes(url)) {
-    //   alert(url + " is already in base_urls")
-    //   return false;
-    // }
-
+    // make sure base urls are unique
+    if (base_urls.includes(url)) {
+      alert("url" + (base_urls.indexOf(url)+1) + " is already " + url + "\nbase_urls must be unique.");
+      success = false;
+    }
     base_urls.push(url);
     chrome.storage.sync.set({"base_urls": base_urls});
-    // console.log("saved base_urls: " + base_urls);
-  })
-  return true
+  });
+  return success;
 }
 
 // just check if it starts with http or https and has a domain or ip
@@ -78,7 +73,6 @@ function display_url_ui(form, url, i) {
     // also break this function up (function to add inputs with same layout (label, input, add/remove button))
     remove_input.onclick = function() {
       let url = this.id.replace("remove_", "");
-      // console.log(url)
       remove_base_url(url);
       location.reload();
     }
@@ -123,7 +117,6 @@ function set_form_fields(base_urls) {
   while (form.hasChildNodes()) {
     form.removeChild(form.lastChild);
   }
-  // console.log(base_urls);
   // add base_urls to form
   for (i=0;i<base_urls.length;i++) {
     let url = base_urls[i];
