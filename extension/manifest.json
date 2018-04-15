@@ -3,18 +3,18 @@
   "name": "chrome-compare",
   "version": "1.0",
   "background": {
-    "scripts": ["background.js"]
+    "scripts": ["src/background.js"]
   },
   "content_scripts": [
     {
       "matches": [
         "<all_urls>"
       ],
-      "js": ["content.js", "url_parser.js"]
+      "js": ["src/content.js", "src/url_parser.js"]
     }
   ],
   "browser_action": {
-    "default_icon": "icon.png"
+    "default_icon": "assets/icon.png"
   },
   "options_page": "options.html",
   "permissions": [

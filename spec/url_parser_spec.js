@@ -1,4 +1,4 @@
-var url_parser = require('../extension/url_parser.js');
+var url_parser = require('../extension/src/url_parser.js');
 var base_urls = ["https://stackoverflow.com", "https://askubuntu.com", "https://datascience.stackexchange.com"];
 var request = {"message":"clicked_browser_action"};
 // stub alert and confirm

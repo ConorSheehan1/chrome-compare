@@ -1,4 +1,4 @@
-let options = require('../extension/options.js');
+let options = require('../extension/src/options.js');
 
 // stub alert and confirm
 alert = jasmine.createSpy("alert");

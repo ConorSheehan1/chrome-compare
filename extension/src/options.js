@@ -22,6 +22,13 @@ function add_base_url(url) {
   }
   chrome.storage.sync.get('base_urls', function(result){
     let base_urls = result.base_urls;
+
+    // // make sure base urls are unique
+    // if (base_urls.includes(url)) {
+    //   alert(url + " is already in base_urls")
+    //   return false;
+    // }
+
     base_urls.push(url);
     chrome.storage.sync.set({"base_urls": base_urls});
     // console.log("saved base_urls: " + base_urls);
