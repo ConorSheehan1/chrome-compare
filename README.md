@@ -28,8 +28,17 @@ For example, it could be configured to open the production, staging, and develop
 ![options gif](docs_assets/options.gif)
 
 ### Tests
-1. Install [jasmine](https://github.com/jasmine/jasmine)
-1. Run ```jasmine```
+This project uses [jasmine](https://github.com/jasmine/jasmine). You can either: 
+
+1. install jasmine directly and run tests like this
+
+        # install jasmine on your machine
+        jasmine
+
+1. use node to install dependencies and run tests like this
+
+        npm install
+        npm test
 
 ### Credit
 Based on [this chrome extension tutorial](https://robots.thoughtbot.com/how-to-make-a-chrome-extension#load-your-extension-into-chrome)
