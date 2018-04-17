@@ -3,6 +3,8 @@ node_js:
     - "4.2.6"
 before_script:
     - "npm i -g jasmine"
+script:
+    - "jasmine"
 branches:
   only:
   - master
