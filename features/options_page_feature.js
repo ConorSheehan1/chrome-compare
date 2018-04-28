@@ -15,4 +15,6 @@ let driver = new webdriver.Builder()
     .setChromeOptions(options)
     .build();
 
-driver.get("chrome://extensions");
+// driver.get("chrome://extensions");
+let extensionId = "ajkmeafjppdaejdhdhhcmbaiipehdhnm";
+driver.get("chrome-extension://" + extensionId + "/options.html");
