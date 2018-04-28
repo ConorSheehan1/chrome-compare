@@ -1,23 +1,26 @@
 {
   "manifest_version": 2,
   "name": "chrome-compare",
-  "version": "0.4",
+  "version": "1.0",
+  "description": "Compare the same page accross multiple sites.",
+  "homepage_url": "https://github.com/ConorSheehan1/chrome-compare",
   "background": {
-    "scripts": ["background.js"]
+    "scripts": ["src/background.js"]
   },
   "content_scripts": [
     {
       "matches": [
         "<all_urls>"
       ],
-      "js": ["content.js", "url_parser.js", "config.js"]
+      "js": ["src/content.js", "src/url_parser.js"]
     }
   ],
   "browser_action": {
-    "default_icon": "icon.png"
+    "default_icon": "assets/icon.png"
   },
+  "options_page": "options.html",
   "permissions": [
-    "tabs"
+    "tabs",
+    "storage"
   ]
-
 }
