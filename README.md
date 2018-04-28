@@ -30,7 +30,8 @@ For example, it could be configured to open the production, staging, and develop
 1. Click options.
 1. Pess the + button to add urls.
 1. Press the - button to remove urls.
-1. Press the reset button to set the urls back to what they were when you first installed the extension
+1. Press the reset button to set the urls back to the defaults   
+  (stackoverflow, askubuntu, and datascience stackexchange)
 ![options gif](docs_assets/options.gif)
 
 ### Tests
