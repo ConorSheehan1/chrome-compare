@@ -7,10 +7,16 @@ This chrome extension can be used to compare the same page across multiple sites
 For example, it could be configured to open the production, staging, and development version of a site.  
 
 ### Setup
-1. Go to ```chrome://extensions/```  
+#### Simple version
+1. Go to ```chrome://extensions/```
+1. Drag extension.crx onto the window
+![simple setup gif](docs_assets/setup_simple.gif)
+
+#### Developer version
+1. Go to ```chrome://extensions/```
 1. Click the developer mode checkbox.  
 1. Click load unpacked extension and select the extension folder in this repo.
-![setup gif](docs_assets/setup.gif)
+![developer setup gif](docs_assets/setup_dev.gif)
 
 ### Usage
 1. Click the extension icon.

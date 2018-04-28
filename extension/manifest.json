@@ -2,6 +2,8 @@
   "manifest_version": 2,
   "name": "chrome-compare",
   "version": "1.0",
+  "description": "Compare the same page accross multiple sites.",
+  "homepage_url": "https://github.com/ConorSheehan1/chrome-compare",
   "background": {
     "scripts": ["src/background.js"]
   },
