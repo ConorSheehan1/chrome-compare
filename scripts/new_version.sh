@@ -20,7 +20,6 @@ is_new_version(){
   fi
 }
 
-# opposite of is_new_version
 is_old_version(){
   if [[ $(git tag -l | grep "v$1") ]]; then
     return 0
@@ -44,12 +43,13 @@ if is_version $1 && is_version $2; then
   if is_old_version $1; then
     if is_new_version $2; then
       echo "moving from version $1 to $2"
+      # use zip -FS to overwrite chrome-compare.v$2.zip if it exists
       commands=(
         "sed -i 's/$1/$2/g' $PWD/extension/manifest.json" 
         "sed -i 's/$1/$2/g' $PWD/package.json" 
         "npm install"
         "git tag v$2"
-        "zip -r $PWD/chrome-compare.v$2.zip $PWD/extension/"
+        "zip -FSr $PWD/chrome-compare.v$2.zip $PWD/extension/"
       )
       # can't use for in when elements contain spaces
       # must iterate over indexes
@@ -62,6 +62,7 @@ if is_version $1 && is_version $2; then
           echo "${commands[$i]}"
         fi
       done
+
     else
       echo "$2 is not a new version"
     fi
