@@ -48,8 +48,8 @@ if is_version $1 && is_version $2; then
         "sed -i 's/$1/$2/g' $PWD/extension/manifest.json" 
         "sed -i 's/$1/$2/g' $PWD/package.json" 
         "npm install"
-        "git tag v$2"
         "zip -FSr $PWD/chrome-compare.v$2.zip $PWD/extension/"
+        "echo 'don't forget to git tag v$2 after commit'"
       )
       # can't use for in when elements contain spaces
       # must iterate over indexes
