@@ -4,6 +4,10 @@
   "version": "1.0.0",
   "description": "Compare the same page accross multiple sites.",
   "homepage_url": "https://github.com/ConorSheehan1/chrome-compare",
+  "icons": {
+    "128": "assets/icon_128.png",
+    "420": "assets/icon_420.png"
+  },
   "background": {
     "scripts": ["src/background.js"]
   },
@@ -16,7 +20,7 @@
     }
   ],
   "browser_action": {
-    "default_icon": "assets/icon.png"
+    "default_icon": "assets/icon_420.png"
   },
   "options_page": "options.html",
   "permissions": [
