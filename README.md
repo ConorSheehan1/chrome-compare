@@ -9,6 +9,13 @@
 This chrome extension can be used to compare the same page across multiple sites.  
 For example, it could be configured to open the production, staging, and development version of a site.  
 
-Now available on the [chrome store](https://chrome.google.com/webstore/detail/chrome-compare/fbojbhlkngpihcjhjhadacdfikocgjfe)
+1. Install via the [chrome store](https://chrome.google.com/webstore/detail/chrome-compare/fbojbhlkngpihcjhjhadacdfikocgjfe), or by cloning this repo and following one of the instal instructions on [the wiki](https://github.com/ConorSheehan1/chrome-compare/wiki/Setup).
+1. Set the urls you want to target by right-clicking on the extension and opening the options page. 
+1. Visit one of the sites you added to the options page and left-click the extention to open the page in all the sites in the options page.
 
-For more details see [the wiki](./wiki)
+For more details see [the wiki](https://github.com/ConorSheehan1/chrome-compare/wiki)
+
+![setup gif](https://github.com/ConorSheehan1/chrome-compare/wiki/docs_assets/options.gif) 
+
+
+
