@@ -4,23 +4,27 @@ const options = require('../extension/src/options.js');
 alert = jasmine.createSpy('alert');
 confirm = jasmine.createSpy('confirm');
 
-// stub chrome storage (global var, refactor?)
-chrome_internal_mock = {};
+// TODO: move to helper. stub chrome storage (global var, refactor?)
+// https://stackoverflow.com/a/48707505/6305204
+// can modify const, just not reassign?
+const chrome_internal_mock = {};
+
 chrome = {
   storage: {
     sync: {
       set(dict) {
-        key = Object.keys(dict)[0];
-        value = Object.values(dict)[0];
+        const key = Object.keys(dict)[0];
+        const value = Object.values(dict)[0];
         // use slice to make copy of array, don't mutate original!
         chrome_internal_mock[key] = value.slice();
         return true;
       },
       get(key, func) {
         if (chrome_internal_mock[key]) {
-          value = chrome_internal_mock;
-          return func(value);
+          return func(chrome_internal_mock);
         }
+        // TODO: is this necessary? just satisifes lint rule, only used in test.
+        return undefined;
       },
     },
   },
@@ -33,7 +37,11 @@ const valid_domain = 'http://stackoverflow.com';
 const invalid_domain = 'http://__';
 const valid_ip = 'http://127.0.0.1';
 const invalid_ip = 'http://0';
-const default_base_urls = ['https://stackoverflow.com', 'https://askubuntu.com', 'https://datascience.stackexchange.com'];
+const default_base_urls = [
+  'https://stackoverflow.com',
+  'https://askubuntu.com',
+  'https://datascience.stackexchange.com',
+];
 
 
 describe('is_url', () => {

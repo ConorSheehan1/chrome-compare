@@ -1,7 +1,9 @@
+/* eslint no-restricted-globals: "off" */
+
 function build_regex(base_urls) {
   // build regex with look ahead that will match any of the base urls
   // and then add whatever comes after the baseurl to the last capture group
-  const regex_string = `(${base_urls.join('|')})(?=(\.*))`;
+  const regex_string = `(${base_urls.join('|')})(?=(.*))`;
   return new RegExp(regex_string, 'i');
 }
 
@@ -16,7 +18,7 @@ function get_domain(regex_match) {
 }
 
 function base_urls_except(base_urls, except) {
-  return base_urls.filter((url) => url != except);
+  return base_urls.filter((url) => url !== except);
 }
 
 function open_urls(current_url, base_urls, request, callback_to_open_url) {
@@ -39,7 +41,7 @@ function open_urls(current_url, base_urls, request, callback_to_open_url) {
 }
 
 // Export node module.
-if (typeof module !== 'undefined' && module.hasOwnProperty('exports')) {
+if (typeof module !== 'undefined' && Object.prototype.hasOwnProperty.call(module, 'exports')) {
   module.exports = {
     open_urls,
     build_regex,
