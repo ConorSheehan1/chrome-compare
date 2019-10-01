@@ -1,0 +1,50 @@
+{
+    "env": {
+        "es6": true,
+        "browser": true,
+        "commonjs": true,
+        "webextensions": true, // otherwise chrome causes undefined warnings
+        "jest": true, // otherwise it and describe cause undefined warnings
+        "jasmine": true // otherwise it and describe cause undefined warnings
+    },
+    "extends": [
+        "airbnb-base"
+    ],
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly",
+        "open_urls": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 2018
+    },
+    "rules": {
+        "no-alert": "off",
+        "camelcase": "off",
+        // don't throw error if var starting with _ is unused
+        "no-unused-vars": [
+            "error",
+            {
+                "argsIgnorePattern": "_(.*)"
+            }
+        ],
+        "max-len": [
+            "error",
+            {
+                "code": 120,
+                "comments": 140
+            }
+        ]
+    },
+    "overrides": [
+        {
+            "files": [
+                "*_spec.js"
+            ],
+            "rules": {
+                "no-global-assign": "off",
+                "no-restricted-globals": "off"
+            }
+        }
+    ]
+}
