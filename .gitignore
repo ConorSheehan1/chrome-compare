@@ -99,6 +99,7 @@ public
 
 # custom ignore
 config.js
+dist
 *.pem
 *.zip
 *.crx
