@@ -1,6 +1,6 @@
 # chrome-compare 
 
-[![Build Status](https://travis-ci.org/ConorSheehan1/chrome-compare.svg?branch=master)](https://travis-ci.org/ConorSheehan1/chrome-compare)
+[![Build Status](https://github.com/ConorSheehan1/chrome-compare/workflows/ci/badge.svg)](https://github.com/ConorSheehan1/chrome-compare/actions/)
 [![GitHub issues](https://img.shields.io/github/issues/ConorSheehan1/chrome-compare.svg)](ConorSheehan1/chrome-compare/issues)
 
 [![Chrome Web Store Version](https://img.shields.io/chrome-web-store/v/fbojbhlkngpihcjhjhadacdfikocgjfe.svg)](https://chrome.google.com/webstore/detail/chrome-compare/fbojbhlkngpihcjhjhadacdfikocgjfe?hl=en-GB)
