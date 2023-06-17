@@ -1,5 +1,7 @@
 # chrome-compare 
 
+Archived due to [manifest v3](https://developer.chrome.com/docs/extensions/mv3/intro/#start-the-conversion)
+
 [![Build Status](https://github.com/ConorSheehan1/chrome-compare/workflows/ci/badge.svg)](https://github.com/ConorSheehan1/chrome-compare/actions/)
 [![GitHub issues](https://img.shields.io/github/issues/ConorSheehan1/chrome-compare.svg)](ConorSheehan1/chrome-compare/issues)
 
